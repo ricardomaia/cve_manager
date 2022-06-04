@@ -1,2 +1,3 @@
 cve-manager/nvd/*
 cve-manager/results/*
+database/*

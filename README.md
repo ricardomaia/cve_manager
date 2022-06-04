@@ -30,10 +30,16 @@ docker-compose build
 docker-compose up -d
 ```
 
-## Automatic execution
+## Initialization Script - First Run
 
 ```console
 docker exec -it cve-manager /cve-manager/scripts/init.sh
+```
+
+## Update Script
+
+```console
+docker exec -it cve-manager /cve-manager/scripts/update.sh
 ```
 
 ## Manual

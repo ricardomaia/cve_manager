@@ -4,32 +4,61 @@ Project forked from [aatlasis/cve_manager](https://github.com/aatlasis/cve_manag
 
 The origial project was modified to and container based version.
 
+Requires git, docker and docker-compose.
+
+## Download project
+
+```console
+git clone https://github.com/ricardomaia/cve_manager.git
+```
+
+## Build images
+
+```console
+cd cve_manager
+docker-compose build
+```
+
+## Run containers
+
+```console
+docker-compose up -d
+```
+
+## Automatic execution
+
+```console
+docker exec -it cve-manager /cve-manager/scripts/init.sh
+```
+
+## Manual
+
+### Create Database
+
+```console
+./cve_manager.py -u postgres -server postgresql -db vuln_db -cd
+```
+  
+### Create tables and views
+
+```console
+./cve_manager.py -u postgres -server postgresql -db vuln_db -ct
+```
+
+### Import Database
+
+```console
+./cve_manager.py -u postgres -server postgresql -db vuln_db -idb -p
+```
+
+## cve-manager.py
+
 A python script that:
 
   a) parses NIST NVD CVEs;
   b) prcoesses and exports them to CSV files;
   c) creates a postgres database and imports all the data in it; and
   d) provides (basic) query capabilities for this CVEs database.
-
-## First run
-
-1. Create Database
-
-  ```console
-  ./cve_manager.py -u postgres -server postgresql -db vuln_db -cd
-  ```
-  
-2. Create tables and views:
-
-  ```console
-  ./cve_manager.py -u postgres -server postgresql -db vuln_db -ct
-  ```
-
-3. Import Database
-
-  ```console
-  ./cve_manager.py -u postgres -server postgresql -db vuln_db -idb -p
-  ```
 
 Usage examples:
 

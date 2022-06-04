@@ -4,6 +4,11 @@ Project forked from [aatlasis/cve_manager](https://github.com/aatlasis/cve_manag
 
 The origial project was modified to and container based version.
 
+![image](https://user-images.githubusercontent.com/1353811/171986361-04424a25-7cfc-43bf-a3d5-4f612322eaf7.png)
+
+![image](https://user-images.githubusercontent.com/1353811/171986430-cb103943-ee85-44af-a736-26afde97d586.png)
+
+
 Requires git, docker and docker-compose.
 
 ## Download project

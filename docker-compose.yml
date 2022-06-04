@@ -35,6 +35,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
+    container_name: pgadmin
     networks:
       - cve-manager-ntw    
     depends_on:

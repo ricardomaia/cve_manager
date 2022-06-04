@@ -1,3 +1,7 @@
+.vscode
 cve-manager/nvd/*
 cve-manager/results/*
+cve-manager/storage/*
+cve-manager/sessions/*
+cve-manager/pgadmin4.db
 database/*

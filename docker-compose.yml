@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:14
+    container_name: postgresql
+    ports:
+      - '5432:5432'
+    networks:
+      - cve-manager-ntw
+    volumes:
+      - cve-manager:/cve-manager
+    environment:
+      - POSTGRESQL_DATABASE=postgres
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=postgres
+      - POSTGRESQL_POSTGRES_PASSWORD=postgres
+
+  cve:
+    build:
+      context: .
+      dockerfile: Dockerfile     
+    container_name: cve
+    image: cve-manager:latest
+    networks:
+      - cve-manager-ntw    
+    depends_on:
+      - postgresql
+    working_dir: /cve-manager
+    restart: always
+    stdin_open: true 
+    tty: true         
+    volumes:
+      - cve-manager:/cve-manager  
+
+  adminer:
+    image: adminer
+    networks:
+      - cve-manager-ntw    
+    depends_on:
+      - postgresql    
+    restart: always
+    ports:
+      - 8080:8080
+
+
+volumes:
+  cve-manager:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./cve-manager
+      o: bind
+networks:
+  cve-manager-ntw:
+    driver: bridge

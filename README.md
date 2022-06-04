@@ -1,14 +1,37 @@
 # cve_manager
+
+Project forked from [aatlasis/cve_manager](https://github.com/aatlasis/cve_manager)
+
+The origial project was modified to and container based version.
+
 A python script that:
 
-  a) parses NIST NVD CVEs, 
-  b) prcoesses and exports them to CSV files, 
-  c) creates a postgres database and imports all the data in it, and
+  a) parses NIST NVD CVEs;
+  b) prcoesses and exports them to CSV files;
+  c) creates a postgres database and imports all the data in it; and
   d) provides (basic) query capabilities for this CVEs database.
 
-It requires Python 3 ("psycopg2" and "requests" python libraries)
+## First run
 
-Usage examples: 
+1. Create Database
+
+  ```console
+  ./cve_manager.py -u postgres -server postgresql -db vuln_db -cd
+  ```
+  
+2. Create tables and views:
+
+  ```console
+  ./cve_manager.py -u postgres -server postgresql -db vuln_db -ct
+  ```
+
+3. Import Database
+
+  ```console
+  ./cve_manager.py -u postgres -server postgresql -db vuln_db -idb -p
+  ```
+
+Usage examples:
 
 - Download, parse and save in CSV files all CVEs from NIST NVD:
   ./cve_manager.py -d -p -csv
@@ -24,8 +47,8 @@ Usage examples:
 
 - Query for a specific CVE:
   ./cve_manager.py -u <myuser> -host <hostname or IP> -db <database_name> -cve 2019-2434
-    
-- Truncate the contents of all tables (required if you want to repeat the import process so as to update the data): 
+
+- Truncate the contents of all tables (required if you want to repeat the import process so as to update the data):
   ./cve_manager.py -u <myuser> -host <hostname or IP> -db <database_name> -tr
   
 - Delete the database (remove it completely):
@@ -50,32 +73,32 @@ Complete list of supported arguments:
   -i INPUT, --input INPUT
                         The directory where NVD json files will been downloaded, and the one from where they will be parsed
                         (default: nvd/)
-                        
+
   -o RESULTS, --output RESULTS
                         The directory where the csv files will be stored (default: results/)
-                        
+
   -u USER, --user USER  The user to connect to the database.
   
   -ow OWNER, --owner OWNER
-                        The owner of the database (if different from the connected user).                     
-                      
+                        The owner of the database (if different from the connected user).
+
   -host HOST, --host HOST
                         The host or IP of the database server.
-                        
+
   -db DATABASE, --database DATABASE
                         The name of the database.
-                        
+
   -cd, --create_database
                         Create the database
-                        
+
   -dd, --drop_database  Drop the database
   
   -ct, --create_tables  Create the tables of the database
   
   -tr, --truncate_cves_tables
                         Truncate the CVEs-related tables
-                        
+
   -cve CVE, --cvs_number CVE
                         Print info for a CVE (CVSS score and other)
-                   
+
 Please check the CVE Manager pdf file for more capabilities, information, and screenshots.
